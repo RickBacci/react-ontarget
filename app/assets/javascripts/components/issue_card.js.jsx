@@ -28,6 +28,8 @@ var IssueCards = React.createClass({
             <h3 className='panel-title text-left'>{ milestone }</h3>
           </div>
           <div className='panel-body'>
+
+            <UpdateLabelsDropdown labels={ issue.labels } />
             <form className='well issue-card-body'>
               <textarea defaultValue={ issue.title } rows={1} className={'form-control noscrollbars ctrl-enter title-' + issue.number}></textarea>
               <textarea defaultValue={ issue.body } rows={5} className={'form-control noscrollbars ctrl-enter body-' + issue.number}></textarea>
