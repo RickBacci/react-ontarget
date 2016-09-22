@@ -6,6 +6,7 @@ gem 'rails', '4.2.4'
 gem 'pg'
 
 gem 'react-rails'
+gem 'lodash-rails'
 gem 'haml-rails', '~> 0.9'
 gem 'sass-rails', '~> 5.0'
 gem 'autoprefixer-rails'

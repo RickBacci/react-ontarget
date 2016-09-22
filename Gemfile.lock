@@ -124,6 +124,8 @@ GEM
     jwt (1.5.1)
     launchy (2.4.3)
       addressable (~> 2.3)
+    lodash-rails (4.15.0)
+      railties (>= 3.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -289,6 +291,7 @@ DEPENDENCIES
   haml-rails (~> 0.9)
   jquery-rails
   launchy
+  lodash-rails
   newrelic_rpm
   omniauth-github
   pg
