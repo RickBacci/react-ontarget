@@ -1,12 +1,14 @@
 var IssueCards = React.createClass({
   propTypes: {
     issues: React.PropTypes.array,
-    status: React.PropTypes.string
+    status: React.PropTypes.string,
+    repolabels: React.PropTypes.array
   },
 
   render: function() {
     var status     = this.props.status;
     var issues     = this.props.issues;
+    var repolabels = this.props.repolabels;
 
     var issuesList = issues.map(function(issue, index){
       var milestone;
@@ -28,8 +30,7 @@ var IssueCards = React.createClass({
             <h3 className='panel-title text-left'>{ milestone }</h3>
           </div>
           <div className='panel-body'>
-
-            <UpdateLabelsDropdown labels={ issue.labels } />
+            <UpdateLabelsDropdown repolabels={ repolabels } issue={ issue } />
             <form className='well issue-card-body'>
               <textarea defaultValue={ issue.title } rows={1} className={'form-control noscrollbars ctrl-enter title-' + issue.number}></textarea>
               <textarea defaultValue={ issue.body } rows={5} className={'form-control noscrollbars ctrl-enter body-' + issue.number}></textarea>
