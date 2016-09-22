@@ -26,6 +26,10 @@
 $gray1: #A1949A;
 $primary-color: #333;
 
+textarea {
+  resize: none;
+}
+
 .card-labels {
   padding-left: 4px;
   padding-right: 4px;
