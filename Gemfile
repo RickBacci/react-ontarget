@@ -5,7 +5,8 @@ ruby '2.3.1'
 gem 'rails', '4.2.4'
 gem 'pg'
 
-gem "haml-rails", "~> 0.9"
+gem 'react-rails'
+gem 'haml-rails', '~> 0.9'
 gem 'sass-rails', '~> 5.0'
 gem 'autoprefixer-rails'
 

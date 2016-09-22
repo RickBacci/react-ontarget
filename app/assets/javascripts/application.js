@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 // require jquery.ui.all
+//= require react
+//= require react_ujs
+//= require components
 
 //= require bootstrap-sprockets
 
