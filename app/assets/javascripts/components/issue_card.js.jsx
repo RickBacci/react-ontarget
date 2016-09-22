@@ -18,11 +18,7 @@ var IssueCards = React.createClass({
       }
 
       var labels = issue.labels.map(function(label, index){
-        return <li key={ index } style={{ display: 'inline' }}>
-          <div className='btn btn-xs card-labels' style={{ backgroundColor: '#' + label.color }}>
-            { label.name }
-          </div>
-        </li>
+        return <li key={ index } style={{ backgroundColor: '#' + label.color }}>{ label.name }</li>
       });
 
       return (
