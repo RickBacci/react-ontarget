@@ -1,13 +1,27 @@
 var UpdateLabelsDropdown = React.createClass({
   propTypes: {
-    repolabels: React.PropTypes.array,
+    repoLabels: React.PropTypes.array,
     issue: React.PropTypes.object
   },
 
   render: function() {
 
-    var issue  = this.props.issue;
-    var labels = this.props.repolabels.map(function(label, index){
+    var issue            = this.props.issue;
+    var repoLabels       = this.props.repoLabels;
+
+    var issueLabels      = issue.labels.map(function(issue) {
+      return issue.table;
+    });
+
+    var issueLabelNames  = issueLabels.map(function(issue) {
+      return issue.table.table.name;
+    });
+
+    function findIssueLabels(labelname) {
+      return _.includes(issueLabelNames, labelname)
+    };
+
+    var dropDownLabels = repoLabels.map(function(label, index){
       return (
 
         <div key={ index } style={{ backgroundColor: '#' + label.color }}>
