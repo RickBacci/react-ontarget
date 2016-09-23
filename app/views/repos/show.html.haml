@@ -5,9 +5,11 @@
       .col-md-12
         %h1.text-center.text-white
           = current_user.current_repo.upcase if current_user.current_repo
-    .row.no-gutters
-      - statuses.each do |status|
-        .col-md-3.status-column.border-gutters.column-border
-          %h2.text-center
-            = status
-          = react_component('IssueCards', issues: @issues, repolabels: @labels, status: status)
+      .row.no-gutters
+        - statuses.each do |status|
+          .col-md-3.status-column.border-gutters.column-border
+            %h2.text-center
+              = status
+            - @repo.issues.each do |issue|
+              - next unless issue.status == status
+              = react_component('IssueCards', repo: @repo)

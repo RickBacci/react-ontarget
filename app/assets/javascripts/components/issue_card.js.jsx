@@ -1,16 +1,17 @@
 var IssueCards = React.createClass({
   propTypes: {
-    issues: React.PropTypes.array,
-    status: React.PropTypes.string,
-    repolabels: React.PropTypes.array
+    repo: React.PropTypes.object,
   },
 
   render: function() {
-    var status     = this.props.status;
-    var issues     = this.props.issues;
-    var repolabels = this.props.repolabels;
+    var repo   = this.props.repo.table;
+
+    var issues = repo.issues.map(function(issue) {
+      return issue.table;
+    });
 
     var issuesList = issues.map(function(issue, index){
+
       var milestone;
 
       if (issue.milestone !== null) {
@@ -19,7 +20,12 @@ var IssueCards = React.createClass({
         milestone = 'No milestone';
       }
 
-      var labels = issue.labels.map(function(label, index){
+      var repoLabels = repo.labels.map(function(label) {
+        return label.table;
+      });
+
+      var issueLabels = issue.labels.map(function(label, index){
+        label = label.table.table.table;
         return <li className='btn btn-xs' key={ index } style={{ backgroundColor: '#' + label.color }}>{ label.name }</li>
       });
 
@@ -30,13 +36,13 @@ var IssueCards = React.createClass({
             <h3 className='panel-title text-left'>{ milestone }</h3>
           </div>
           <div className='panel-body'>
-            <UpdateLabelsDropdown repolabels={ repolabels } issue={ issue } />
+            <UpdateLabelsDropdown repoLabels={ repoLabels } issue={ issue } />
             <form className='well issue-card-body'>
               <textarea defaultValue={ issue.title } rows={1} className={'form-control noscrollbars ctrl-enter title-' + issue.number}></textarea>
               <textarea defaultValue={ issue.body } rows={5} className={'form-control noscrollbars ctrl-enter body-' + issue.number}></textarea>
             </form>
           </div>
-          <ul className='clearfix list-unstyled'>{ labels }</ul>
+          <ul className='clearfix list-unstyled'>{ issueLabels }</ul>
         </li>
       );
 

@@ -24,8 +24,28 @@ class ReposController < ApplicationController
     repo_name = params[:repo_name]
     set_client_and_current_repo_names(repo_name)
 
-    @issues = client.issues.list user: client.user, repo: client.repo
-    @labels = client.issues.labels.list
+    issues = client.issues.list user: client.user, repo: client.repo
+
+    labels = client.issues.labels.list
+
+    repo_labels = labels.map { |label| { name: label.name, color: label.color, checked: false }}
+
+    issues = issues.map do |issue|
+      issue_labels = issue.labels.map { |label| JSON.parse({ name: label.name, color: label.color }.to_json, object_class: OpenStruct)}
+
+
+      { number: issue.number,
+        status: get_status(issue_labels) || 'Backlog',
+        title:  issue.title,
+        body:   issue.body,
+        labels: issue_labels
+      }
+    end
+
+
+    repo  = {name: repo_name, labels: repo_labels, issues: issues }
+
+    @repo = JSON.parse(repo.to_json, object_class: OpenStruct)
   end
 
   def create
@@ -71,6 +91,11 @@ class ReposController < ApplicationController
 
 
   private
+
+  def get_status(labels)
+    status = labels.each { |label| return label.name if statuses.include?(label.name) }
+  end
+
 
   def repo_params
     params.require(:repo).permit(:id, :name)
