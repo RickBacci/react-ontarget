@@ -26,26 +26,24 @@ class ReposController < ApplicationController
 
     issues = client.issues.list user: client.user, repo: client.repo
 
-    labels = client.issues.labels.list
+    labels = client.issues.labels.list.body
 
-    repo_labels = labels.map { |label| { name: label.name, color: label.color, checked: false }}
+    repo_labels = labels.map { |label| Hashie::Mash.new({ name: label.name, color: label.color, checked: false })}
 
-    issues = issues.map do |issue|
-      issue_labels = issue.labels.map { |label| JSON.parse({ name: label.name, color: label.color }.to_json, object_class: OpenStruct)}
+    issues = issues.body.map do |issue|
+      issue_labels = issue.labels.map { |label| Hashie::Mash.new({ name: label.name, color: label.color })}
 
-
+      Hashie::Mash.new(
       { number: issue.number,
         status: get_status(issue_labels) || 'Backlog',
+        milestone: issue.milestone || 'No Milestone',
         title:  issue.title,
         body:   issue.body,
         labels: issue_labels
-      }
+      })
     end
 
-
-    repo  = {name: repo_name, labels: repo_labels, issues: issues }
-
-    @repo = JSON.parse(repo.to_json, object_class: OpenStruct)
+    @repo  = Hashie::Mash.new({name: repo_name, labels: repo_labels, issues: issues })
   end
 
   def create

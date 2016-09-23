@@ -9,12 +9,10 @@ var UpdateLabelsDropdown = React.createClass({
     var issue            = this.props.issue;
     var repoLabels       = this.props.repoLabels;
 
-    var issueLabels      = issue.labels.map(function(issue) {
-      return issue.table;
-    });
+    var issueLabels      = issue.labels;
 
     var issueLabelNames  = issueLabels.map(function(issue) {
-      return issue.table.table.name;
+      return issue.name;
     });
 
     function findIssueLabels(labelname) {
