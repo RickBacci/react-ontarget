@@ -1,16 +1,14 @@
 function setColumnHeight() {
 
   var largestHeight = 0;
-  var columns =  $('.status-list');
+  var columns =  $('.status-column');
 
-  $('.status-list').height(0);
-
-  $.each( columns, function (i, column, c) {
-    if (column.scrollHeight >= largestHeight) {
-      largestHeight = column.scrollHeight;
+  $.each( columns, function (i, column) {
+    if (column.clientHeight >= largestHeight) {
+      largestHeight = column.clientHeight;
     }
   });
 
-  $('.status-list').height(largestHeight);
+  $('.status-column').height(largestHeight);
 }
 
