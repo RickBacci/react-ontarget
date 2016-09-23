@@ -24,17 +24,21 @@ var UpdateTimeDropdown = React.createClass({
     };
 
 
+    function findIssueLabels(labelname) {
+      return _.includes(issueLabelNames, labelname)
+    };
+
     var dropDownTimes = _.map(timerValues, function(val, key){
       return (
         <div key={ key }>
-          <label><input type='radio' value={ key } />{ val }</label>
+          <label><input type='radio' defaultChecked={findIssueLabels(key)} value={ key } />{ val }</label>
         </div>
       );
     });
 
     return (
       <div className='dropdown pull-right'>
-        <button className="btn btn-default dropdown-toggle" aria-expanded='true' aria-haspopup='true' data-toggle="dropdown"><strong>Times</strong>
+        <button className="btn btn-default dropdown-toggle" aria-expanded='true' aria-haspopup='true' data-toggle="dropdown"><strong>{timerValues[issue.time]}</strong>
           <span className="caret"></span></button>
         <div className="dropdown-menu" aria-labelledby='dropdown_times'>
           { dropDownTimes }

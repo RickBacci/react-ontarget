@@ -33,13 +33,21 @@ class ReposController < ApplicationController
     issues = issues.body.map do |issue|
       issue_labels = issue.labels.map { |label| Hashie::Mash.new({ name: label.name, color: label.color })}
 
+      issue_time ||= '5'
+      issue_labels.each do |label|
+        if timer_values.keys.include?(label.name)
+          issue_time = label.name
+        end
+      end
+
       Hashie::Mash.new(
-      { number: issue.number,
-        status: get_status(issue_labels) || 'Backlog',
-        milestone: issue.milestone || 'No Milestone',
-        title:  issue.title,
-        body:   issue.body,
-        labels: issue_labels
+        { number: issue.number,
+          status: get_status(issue_labels) || 'Backlog',
+          milestone: issue.milestone || 'No Milestone',
+          title:  issue.title,
+          body:   issue.body,
+          time:   issue_time,
+          labels: issue_labels
       })
     end
 
