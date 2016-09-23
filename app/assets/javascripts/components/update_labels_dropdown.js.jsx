@@ -10,8 +10,8 @@ var UpdateLabelsDropdown = React.createClass({
     var labels = this.props.repolabels.map(function(label, index){
       return (
 
-        <div className={'btn btn-xs ' + label.name + ' labels-' + issue.number } key={ index } style={{ backgroundColor: '#' + label.color }}>
-          <label><input type='checkbox' value={ label.name } />{ label.name }</label>
+        <div key={ index } style={{ backgroundColor: '#' + label.color }}>
+          <label><input type='checkbox' defaultChecked={findIssueLabels(label.name)} value={ label.name } />{ label.name }</label>
         </div>
 
       );
@@ -20,11 +20,11 @@ var UpdateLabelsDropdown = React.createClass({
 
     return (
 
-      <div className='dropdown pull-left' id={issue.number}>
-        <button id={ 'dropdown-' + issue.number } className="btn btn-default dropdown-toggle" aria-expanded='true' aria-haspopup='true' data-toggle="dropdown"><strong>Labels</strong>
+      <div className='dropdown pull-left'>
+        <button className="btn btn-default dropdown-toggle" aria-expanded='true' aria-haspopup='true' data-toggle="dropdown"><strong>Labels</strong>
           <span className="caret"></span></button>
-        <div className="dropdown-menu" aria-labelledby={ 'dropdown-' + issue.number }>
-          { labels }
+        <div className="dropdown-menu" aria-labelledby='dropdown_labels'>
+          { dropDownLabels }
         </div>
       </div>
     );

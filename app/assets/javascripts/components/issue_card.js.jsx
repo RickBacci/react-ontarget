@@ -30,7 +30,7 @@ var IssueCards = React.createClass({
       });
 
       return (
-        <li key={ index } className='draggable panel panel-default card-panel cards' data-number={issue.number}>
+        <li key={ index } className='draggable panel panel-default card-panel cards'>
           <div className='panel-heading'>
             <h3 className='panel-title pull-right'>#{ issue.number }</h3>
             <h3 className='panel-title text-left'>{ milestone }</h3>
@@ -38,8 +38,8 @@ var IssueCards = React.createClass({
           <div className='panel-body'>
             <UpdateLabelsDropdown repoLabels={ repoLabels } issue={ issue } />
             <form className='well issue-card-body'>
-              <textarea defaultValue={ issue.title } rows={1} className={'form-control noscrollbars ctrl-enter title-' + issue.number}></textarea>
-              <textarea defaultValue={ issue.body } rows={5} className={'form-control noscrollbars ctrl-enter body-' + issue.number}></textarea>
+              <textarea defaultValue={ issue.title } rows={1} className={'form-control noscrollbars ctrl-enter'}></textarea>
+              <textarea defaultValue={ issue.body } rows={5} className={'form-control noscrollbars ctrl-enter'}></textarea>
             </form>
           </div>
           <ul className='clearfix list-unstyled'>{ issueLabels }</ul>
