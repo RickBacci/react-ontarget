@@ -14,7 +14,7 @@ var IssueCards = React.createClass({
 
       var milestone;
 
-      if (issue.milestone !== null) {
+      if (issue.milestone !== undefined && issue.milestone !== null) {
         milestone = issue.milestone.title;
       } else {
         milestone = 'No milestone';
