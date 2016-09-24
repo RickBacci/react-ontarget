@@ -16,33 +16,26 @@ var UpdateTimeDropdown = React.createClass({
     });
 
     var timerValues = {
-         '5': '5 seconds',
-       '300': '5 minutes',
-       '600': '10 minutes',
+      '5': '5 seconds',
+      '300': '5 minutes',
+      '600': '10 minutes',
       '1500': '25 minutes',
       '3000': '50 minutes'
     };
 
-
-    function findIssueLabels(labelname) {
-      return _.includes(issueLabelNames, labelname)
-    };
-
     var dropDownTimes = _.map(timerValues, function(val, key){
       return (
-        <div key={ key }>
-          <label><input type='radio' defaultChecked={findIssueLabels(key)} value={ key } />{ val }</label>
-        </div>
+          <option key={ key } value={ key } name="timer-time"> { val } </option>
       );
     });
 
     return (
-      <div className='dropdown pull-right'>
-        <button className="btn btn-default dropdown-toggle" aria-expanded='true' aria-haspopup='true' data-toggle="dropdown"><strong>{timerValues[issue.time]}</strong>
-          <span className="caret"></span></button>
-        <div className="dropdown-menu" aria-labelledby='dropdown_times'>
-          { dropDownTimes }
-        </div>
+      <div className="form-group pull-right">
+        <label htmlFor="timer-time">
+          <select className="form-control" defaultValue={ issue.time } name="timer-time">
+            { dropDownTimes }
+          </select>
+        </label>
       </div>
     );
   }
