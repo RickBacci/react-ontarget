@@ -22,8 +22,9 @@ var UpdateLabelsDropdown = React.createClass({
     var dropDownLabels = repoLabels.map(function(label, index){
       return (
 
-        <div key={ index } style={{ backgroundColor: '#' + label.color }}>
-          <label><input type='checkbox' defaultChecked={findIssueLabels(label.name)} value={ label.name } />{ label.name }</label>
+        <div className='label-box-dropdown btn btn-xs' key={ index } style={{ backgroundColor: '#' + label.color }}>
+          <input type='checkbox' defaultChecked={findIssueLabels(label.name)} value={ label.name } />
+          <label className='dropdown-labels'>{ label.name }</label>
         </div>
 
       );

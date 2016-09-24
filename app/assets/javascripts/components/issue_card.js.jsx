@@ -44,7 +44,9 @@ var IssueCards = React.createClass({
               <textarea defaultValue={ issue.body } rows={5} className={'form-control noscrollbars ctrl-enter'}></textarea>
             </form>
           </div>
-          <ul className='clearfix list-unstyled'>{ issueLabels }</ul>
+          <div className='issue-labels'>
+            <ul className='list-unstyled'>{ issueLabelListItems }</ul>
+          </div>
         </li>
       );
 
