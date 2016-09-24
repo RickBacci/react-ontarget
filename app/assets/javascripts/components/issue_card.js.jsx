@@ -4,11 +4,27 @@ var IssueCards = React.createClass({
   },
 
   render: function() {
-    var repo       = this.props.repo;
-    var issuesList = repo.issues.map(function(issue, index){
+    var repo         = this.props.repo;
+    var repoLabels   = repo.labels;
+    var issuesList   = repo.issues.map(function(issue, index){
 
-      var repoLabels  = repo.labels;
-      var issueLabels = issue.labels.map(function(label, index){
+      var labelNameFilters = [
+        { 'name': 'Backlog' },
+        { 'name': 'Ready' },
+        { 'name': 'Current' },
+        { 'name': 'Completed' },
+        { 'name': '5' },
+        { 'name': '300' },
+        { 'name': '600' },
+        { 'name': '1500' },
+        { 'name': '3000' }
+      ];
+
+
+      var filteredRepoLabels  = _.differenceBy(repoLabels, labelNameFilters, 'name');
+      var filteredIssueLabels = _.differenceBy(issue.labels, labelNameFilters, 'name');
+
+      var issueLabelListItems = filteredIssueLabels.map(function(label, index){
         return <li className='btn btn-xs' key={ index } style={{ backgroundColor: '#' + label.color }}>{ label.name }</li>
       });
 
@@ -19,7 +35,7 @@ var IssueCards = React.createClass({
             <h3 className='panel-title text-left'>{ issue.milestone }</h3>
           </div>
           <div className='issue-dropdowns clearfix'>
-            <UpdateLabelsDropdown repoLabels={ repoLabels } issue={ issue } />
+            <UpdateLabelsDropdown repoLabels={ filteredRepoLabels } issue={ issue } />
             <UpdateTimeDropdown repoLabels={ repoLabels } issue={ issue } />
           </div>
           <div className='panel-body'>
