@@ -34,7 +34,7 @@ var UpdateLabelsDropdown = React.createClass({
     return (
 
       <div className='dropdown pull-left'>
-        <button className="btn btn-default dropdown-toggle" aria-expanded='true' aria-haspopup='true' data-toggle="dropdown"><strong>Labels</strong>
+        <button className="btn btn-default dropdown-toggle time-select" aria-expanded='true' aria-haspopup='true' data-toggle="dropdown"><strong className='pad-right'>Labels</strong>
           <span className="caret"></span></button>
         <div className="dropdown-menu" aria-labelledby='dropdown_labels'>
           { dropDownLabels }

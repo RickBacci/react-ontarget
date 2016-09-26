@@ -32,7 +32,7 @@ var UpdateTimeDropdown = React.createClass({
     return (
       <div className="form-group pull-right">
         <label htmlFor="timer-time">
-          <select className="form-control" defaultValue={ issue.time } name="timer-time">
+          <select className="form-control margin-right" defaultValue={ issue.time } name="timer-time">
             { dropDownTimes }
           </select>
         </label>
