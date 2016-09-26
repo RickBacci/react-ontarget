@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
 
-  get '/home',                    to: 'home#show'
   get '/auth/github',             as: 'login'
   get '/auth/github/callback',    to: 'sessions#create'
   get '/logout',                  to: 'sessions#destroy'
-  get '/auth/failure',            to: 'home#show'
+  get '/auth/failure',            to: 'repos#index'
 
   resources :repos,  only: [:index]
   resources :issues, only: [:index, :create]
