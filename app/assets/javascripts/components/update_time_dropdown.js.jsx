@@ -1,20 +1,9 @@
 var UpdateTimeDropdown = React.createClass({
   propTypes: {
-    repoLabels: React.PropTypes.array,
-    issue:      React.PropTypes.object
+    issueTime:  React.PropTypes.string
   },
 
   render: function() {
-
-    var issue            = this.props.issue;
-    var repoLabels       = this.props.repoLabels;
-
-    var issueLabels      = issue.labels;
-
-    var issueLabelNames  = issueLabels.map(function(issue) {
-      return issue.name;
-    });
-
     var timerValues = {
       '5': '5 seconds',
       '300': '5 minutes',
@@ -32,7 +21,7 @@ var UpdateTimeDropdown = React.createClass({
     return (
       <div className="form-group pull-right">
         <label htmlFor="timer-time">
-          <select className="form-control margin-right" defaultValue={ issue.time } name="timer-time">
+          <select className="form-control margin-right" defaultValue={ this.props.issueTime } name="timer-time">
             { dropDownTimes }
           </select>
         </label>
