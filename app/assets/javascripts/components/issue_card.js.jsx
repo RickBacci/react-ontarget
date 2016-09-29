@@ -24,6 +24,6 @@ var IssueCards = React.createClass({
 
     });
 
-    return  <ul className='status-list sortable list-unstyled' data-columnstatus={ status }>{ issuesList }</ul>;
+    return  <ul className='status-list sortable list-unstyled' data-columnstatus={ status }>{ issueCardsList }</ul>;
   }
 });
