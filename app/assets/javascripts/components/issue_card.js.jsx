@@ -4,11 +4,9 @@ var IssueCards = React.createClass({
   },
 
   render: function() {
-    var repo             = this.props.repo;
-    var repoLabels       = repo.labels;
+    var repoLabels         = this.props.repo.labels;
 
-    var issuesList = repo.issues.map(function(issue, index){
-
+    var issueCardsList     = this.props.repo.issues.map(function(issue, index){
       var filteredRepoLabels  = filterLabels(repoLabels);
       var filteredIssueLabels = filterLabels(issue.labels);
 
