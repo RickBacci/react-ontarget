@@ -1,17 +1,11 @@
 var UpdateLabelsDropdown = React.createClass({
   propTypes: {
     repoLabels: React.PropTypes.array,
-    issue: React.PropTypes.object
+    issueLabels: React.PropTypes.array
   },
 
   render: function() {
-
-    var issue            = this.props.issue;
-    var repoLabels       = this.props.repoLabels;
-
-    var issueLabels      = issue.labels;
-
-    var issueLabelNames  = issueLabels.map(function(issue) {
+    var issueLabelNames  = this.props.issueLabels.map(function(issue) {
       return issue.name;
     });
 
@@ -19,7 +13,7 @@ var UpdateLabelsDropdown = React.createClass({
       return _.includes(issueLabelNames, labelname)
     };
 
-    var dropDownLabels = repoLabels.map(function(label, index){
+    var dropDownLabels = this.props.repoLabels.map(function(label, index){
       return (
 
         <div className='label-box-dropdown btn btn-xs' key={ index } style={{ backgroundColor: '#' + label.color }}>
