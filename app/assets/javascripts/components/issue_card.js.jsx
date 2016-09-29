@@ -7,26 +7,13 @@ var IssueCards = React.createClass({
     var repo             = this.props.repo;
     var repoLabels       = repo.labels;
 
-    var labelNameFilters = [
-      { 'name': 'Backlog' },
-      { 'name': 'Ready' },
-      { 'name': 'Current' },
-      { 'name': 'Completed' },
-      { 'name': '5' },
-      { 'name': '300' },
-      { 'name': '600' },
-      { 'name': '1500' },
-      { 'name': '3000' }
-    ];
-
     var issuesList = repo.issues.map(function(issue, index){
-
-      var filteredRepoLabels  = _.differenceBy(repoLabels, labelNameFilters, 'name');
-      var filteredIssueLabels = _.differenceBy(issue.labels, labelNameFilters, 'name');
 
       var issueLabelListItems = filteredIssueLabels.map(function(label, index){
         return <li className='btn btn-xs' key={ index } style={{ backgroundColor: '#' + label.color }}>{ label.name }</li>
       });
+      var filteredRepoLabels  = filterLabels(repoLabels);
+      var filteredIssueLabels = filterLabels(issue.labels);
 
       return (
         <li key={ index } className='draggable panel panel-default card-panel cards'>
