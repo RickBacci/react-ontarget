@@ -28,7 +28,7 @@ class ReposController < ApplicationController
 
     labels = client.issues.labels.list.body
 
-    repo_labels = labels.map { |label| Hashie::Mash.new({ name: label.name, color: label.color, checked: false })}
+    repo_labels = labels.map { |label| Hashie::Mash.new({ name: label.name, color: label.color })}
 
     issues = issues.body.map do |issue|
       issue_labels = issue.labels.map { |label| Hashie::Mash.new({ name: label.name, color: label.color })}
