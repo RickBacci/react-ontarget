@@ -13,10 +13,7 @@ var IssueCards = React.createClass({
       return (
         <li key={ index } className='draggable panel panel-default card-panel cards'>
           <IssueCardHeader issueNumber={ issue.number } issueMilestone= { issue.milestone } />
-          <div className='issue-dropdowns clearfix'>
-            <UpdateLabelsDropdown repoLabels={ filteredRepoLabels } issueLabels={ filteredIssueLabels } />
-            <UpdateTimeDropdown issueTime={ issue.time } />
-          </div>
+          <IssueCardDropdowns repoLabels={ filteredRepoLabels } issueLabels={ filteredIssueLabels } issueTime={ issue.time }/>
           <IssueCardBody title={ issue.title }body={ issue.body } />
           <IssueLabelsList labels={ filteredIssueLabels } />
         </li>
