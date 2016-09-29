@@ -9,9 +9,6 @@ var IssueCards = React.createClass({
 
     var issuesList = repo.issues.map(function(issue, index){
 
-      var issueLabelListItems = filteredIssueLabels.map(function(label, index){
-        return <li className='btn btn-xs' key={ index } style={{ backgroundColor: '#' + label.color }}>{ label.name }</li>
-      });
       var filteredRepoLabels  = filterLabels(repoLabels);
       var filteredIssueLabels = filterLabels(issue.labels);
 
@@ -31,9 +28,8 @@ var IssueCards = React.createClass({
               <textarea defaultValue={ issue.body } rows={ 5 } className='form-control noscrollbars ctrl-enter'></textarea>
             </form>
           </div>
-          <div className='issue-labels'>
-            <ul className='list-unstyled'>{ issueLabelListItems }</ul>
           </div>
+          <IssueLabelsList labels={ filteredIssueLabels } />
         </li>
       );
 
