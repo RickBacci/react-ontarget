@@ -4,22 +4,22 @@ var IssueCards = React.createClass({
   },
 
   render: function() {
-    var repo         = this.props.repo;
-    var repoLabels   = repo.labels;
-    var issuesList   = repo.issues.map(function(issue, index){
+    var repo             = this.props.repo;
+    var repoLabels       = repo.labels;
 
-      var labelNameFilters = [
-        { 'name': 'Backlog' },
-        { 'name': 'Ready' },
-        { 'name': 'Current' },
-        { 'name': 'Completed' },
-        { 'name': '5' },
-        { 'name': '300' },
-        { 'name': '600' },
-        { 'name': '1500' },
-        { 'name': '3000' }
-      ];
+    var labelNameFilters = [
+      { 'name': 'Backlog' },
+      { 'name': 'Ready' },
+      { 'name': 'Current' },
+      { 'name': 'Completed' },
+      { 'name': '5' },
+      { 'name': '300' },
+      { 'name': '600' },
+      { 'name': '1500' },
+      { 'name': '3000' }
+    ];
 
+    var issuesList = repo.issues.map(function(issue, index){
 
       var filteredRepoLabels  = _.differenceBy(repoLabels, labelNameFilters, 'name');
       var filteredIssueLabels = _.differenceBy(issue.labels, labelNameFilters, 'name');
@@ -40,8 +40,8 @@ var IssueCards = React.createClass({
           </div>
           <div className='panel-body'>
             <form className='well issue-card-body'>
-              <textarea defaultValue={ issue.title } rows={1} className={'form-control noscrollbars ctrl-enter'}></textarea>
-              <textarea defaultValue={ issue.body } rows={5} className={'form-control noscrollbars ctrl-enter'}></textarea>
+              <textarea defaultValue={ issue.title } rows={ 1 } className='form-control noscrollbars ctrl-enter'></textarea>
+              <textarea defaultValue={ issue.body } rows={ 5 } className='form-control noscrollbars ctrl-enter'></textarea>
             </form>
           </div>
           <div className='issue-labels'>
