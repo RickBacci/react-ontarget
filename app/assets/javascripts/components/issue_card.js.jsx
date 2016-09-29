@@ -17,13 +17,8 @@ var IssueCards = React.createClass({
             <UpdateLabelsDropdown repoLabels={ filteredRepoLabels } issue={ issue } />
             <UpdateTimeDropdown repoLabels={ repoLabels } issue={ issue } />
           </div>
-          <div className='panel-body'>
-            <form className='well issue-card-body'>
-              <textarea defaultValue={ issue.title } rows={ 1 } className='form-control noscrollbars ctrl-enter'></textarea>
-              <textarea defaultValue={ issue.body } rows={ 5 } className='form-control noscrollbars ctrl-enter'></textarea>
-            </form>
           </div>
-          </div>
+          <IssueCardBody title={ issue.title }body={ issue.body } />
           <IssueLabelsList labels={ filteredIssueLabels } />
         </li>
       );
