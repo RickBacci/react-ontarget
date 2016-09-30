@@ -4,11 +4,14 @@ var IssueCardContainer = React.createClass({
     filteredIssueLabels: React.PropTypes.array,
     issue:               React.PropTypes.object
   },
-
+  getInitialState: function() {
+    return {
+      filteredIssueLabels: this.props.filteredIssueLabels
+    };
+  },
   render: function() {
     var issue = this.props.issue;
     var filteredRepoLabels  = this.props.filteredRepoLabels;
-    var filteredIssueLabels = this.props.filteredIssueLabels;
 
     var liClassNames = 'draggable panel panel-default card-panel cards';
 
@@ -20,7 +23,7 @@ var IssueCardContainer = React.createClass({
           />
           <IssueCardDropdowns
             repoLabels  = {filteredRepoLabels}
-            issueLabels = {filteredIssueLabels}
+            issueLabels = {this.state.filteredIssueLabels}
             issueTime   = {issue.time}
           />
           <IssueCardBody
@@ -30,7 +33,7 @@ var IssueCardContainer = React.createClass({
             labels = {issue.labels}
           />
           <IssueLabelsList
-            labels = {filteredIssueLabels}
+            labels = {this.state.filteredIssueLabels}
           />
         </li>
     );
