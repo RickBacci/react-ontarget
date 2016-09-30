@@ -1,20 +1,19 @@
-var IssueCards = React.createClass({
+var IssueCardContainer = React.createClass({
   propTypes: {
-    repo: React.PropTypes.object,
+    filteredRepoLabels:  React.PropTypes.array,
+    filteredIssueLabels: React.PropTypes.array,
+    issue:               React.PropTypes.object
   },
 
   render: function() {
-    var repoLabels         = this.props.repo.labels;
+    var issue = this.props.issue;
+    var filteredRepoLabels  = this.props.filteredRepoLabels;
+    var filteredIssueLabels = this.props.filteredIssueLabels;
 
-    var issueCardsList     = this.props.repo.issues.map(function(issue, index){
-      var filteredRepoLabels  = filterLabels(repoLabels);
-      var filteredIssueLabels = filterLabels(issue.labels);
+    var liClassNames = 'draggable panel panel-default card-panel cards';
 
-      return (
-        <li
-          key       = {index}
-          className = 'draggable panel panel-default card-panel cards'>
-
+    return (
+        <li className={liClassNames}>
           <IssueCardHeader
             issueNumber    = {issue.number}
             issueMilestone = {issue.milestone}
@@ -34,17 +33,6 @@ var IssueCards = React.createClass({
             labels = {filteredIssueLabels}
           />
         </li>
-      );
-
-    });
-
-    return  (
-      <ul
-        className         = 'status-list sortable list-unstyled'
-        data-columnstatus = {status}>
-
-        {issueCardsList}
-      </ul>
     );
   }
 });
