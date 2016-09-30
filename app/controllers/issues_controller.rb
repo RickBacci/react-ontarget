@@ -44,13 +44,15 @@ class IssuesController < ApplicationController
   end
 
   def update
-    IssuesController.update.call(
+    issue = IssuesController.update.call(
       client: client,
       number: params[:number],
       title:  params[:title],
       body:   params[:body],
-      labels: params[:labels])
-    head :ok
+      labels: params[:labels].map { |label| label[1] }
+    )
+
+    render json: issue.status
   end
 
   def self.update_card_status
