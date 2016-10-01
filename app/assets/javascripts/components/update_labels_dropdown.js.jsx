@@ -1,10 +1,12 @@
 var UpdateLabelsDropdown = React.createClass({
   propTypes: {
-    repoLabels: React.PropTypes.array,
+    repoLabels:  React.PropTypes.array,
     issueLabels: React.PropTypes.array
   },
   render: function() {
 
+    var onUserInput    = this.props.onUserInput;
+    var issueLabels    = this.props.issueLabels;
 
     var dropDownLabels = this.props.repoLabels.map(function(label, index){
       return (
