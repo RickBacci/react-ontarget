@@ -9,6 +9,11 @@ var IssueCardContainer = React.createClass({
       filteredIssueLabels: this.props.filteredIssueLabels
     };
   },
+  handleUserInput: function(filteredIssueLabels) {
+    this.setState({
+      filteredIssueLabels: filteredIssueLabels
+    });
+  },
   render: function() {
     var issue = this.props.issue;
     var filteredRepoLabels  = this.props.filteredRepoLabels;
