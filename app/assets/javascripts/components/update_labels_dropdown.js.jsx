@@ -3,24 +3,17 @@ var UpdateLabelsDropdown = React.createClass({
     repoLabels: React.PropTypes.array,
     issueLabels: React.PropTypes.array
   },
-
   render: function() {
-    var issueLabelNames  = this.props.issueLabels.map(function(issue) {
-      return issue.name;
-    });
 
-    function findIssueLabels(labelname) {
-      return _.includes(issueLabelNames, labelname)
-    };
 
     var dropDownLabels = this.props.repoLabels.map(function(label, index){
       return (
-
-        <div className='label-box-dropdown btn btn-xs' key={ index } style={{ backgroundColor: '#' + label.color }}>
-          <input type='checkbox' defaultChecked={findIssueLabels(label.name)} value={ label.name } />
-          <label className='dropdown-labels'>{ label.name }</label>
-        </div>
-
+        <RepoLabel
+          key         = {index}
+          label       = {label}
+          issueLabels = {issueLabels}
+          onUserInput = {onUserInput}
+        />
       );
 
     });
@@ -36,4 +29,5 @@ var UpdateLabelsDropdown = React.createClass({
       </div>
     );
   }
+
 });
