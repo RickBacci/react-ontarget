@@ -16,26 +16,27 @@ var IssueCardContainer = React.createClass({
     var liClassNames = 'draggable panel panel-default card-panel cards';
 
     return (
-        <li className={liClassNames}>
-          <IssueCardHeader
-            issueNumber    = {issue.number}
-            issueMilestone = {issue.milestone}
-          />
-          <IssueCardDropdowns
-            repoLabels  = {filteredRepoLabels}
-            issueLabels = {this.state.filteredIssueLabels}
-            issueTime   = {issue.time}
-          />
-          <IssueCardBody
-            title  = {issue.title}
-            body   = {issue.body}
-            number = {issue.number}
-            labels = {issue.labels}
-          />
-          <IssueLabelsList
-            labels = {this.state.filteredIssueLabels}
-          />
-        </li>
+      <li className={liClassNames}>
+        <IssueCardHeader
+          issueNumber    = {issue.number}
+          issueMilestone = {issue.milestone}
+        />
+        <IssueCardDropdowns
+          repoLabels  = {filteredRepoLabels}
+          issueLabels = {this.state.filteredIssueLabels}
+          issueTime   = {issue.time}
+          onUserInput = {this.handleUserInput}
+        />
+        <IssueCardBody
+          title  = {issue.title}
+          body   = {issue.body}
+          number = {issue.number}
+          labels = {issue.labels}
+        />
+        <IssueLabelsList
+          labels      = {this.state.filteredIssueLabels}
+        />
+      </li>
     );
   }
 });
