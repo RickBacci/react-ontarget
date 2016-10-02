@@ -28,30 +28,29 @@ class ReposController < ApplicationController
 
     labels = client.issues.labels.list.body
 
-    repo_labels = labels.map { |label| Hashie::Mash.new({ name: label.name, color: label.color })}
+    repo_labels =
+      labels.map { |label|
+        Hashie::Mash.new({ name: label.name, color: label.color })}
 
     issues = issues.body.map do |issue|
-      issue_labels = issue.labels.map { |label| Hashie::Mash.new({ name: label.name, color: label.color })}
+      issue_labels =
+        issue.labels.map { |label|
+          Hashie::Mash.new({ name: label.name, color: label.color })}
 
-      issue_time ||= '5'
-      issue_labels.each do |label|
-        if timer_values.keys.include?(label.name)
-          issue_time = label.name
-        end
-      end
 
       Hashie::Mash.new(
-        { number: issue.number,
-          status: get_status(issue_labels) || 'Backlog',
+        { number:    issue.number,
+          status:    get_status(issue_labels) || 'Backlog',
           milestone: issue.milestone || 'No Milestone',
-          title:  issue.title,
-          body:   issue.body,
-          time:   issue_time,
-          labels: issue_labels
+          title:     issue.title,
+          body:      issue.body,
+          time:      get_time(issue_labels) || '5',
+          labels:    issue_labels
       })
     end
 
-    @repo  = Hashie::Mash.new({name: repo_name, labels: repo_labels, issues: issues })
+    @repo =
+      Hashie::Mash.new({name: repo_name, labels: repo_labels, issues: issues })
   end
 
   def create
@@ -98,8 +97,19 @@ class ReposController < ApplicationController
 
   private
 
+  def get_time(issue_labels)
+    issue_time = ''
+    issue_labels.each do |label|
+      if timer_values.keys.include?(label.name)
+        issue_time = label.name
+      end
+    end
+    issue_time
+  end
+
+
   def get_status(labels)
-    status = labels.each { |label| return label.name if statuses.include?(label.name) }
+    labels.each { |label| return label.name if statuses.include?(label.name) }
   end
 
 
