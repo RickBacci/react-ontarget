@@ -4,13 +4,9 @@ var RepoLabel = React.createClass({
     issueLabels: React.PropTypes.array
   },
   handleChange: function() {
-    if (this.refs.issueLabelState.checked) {
-      this.props.issueLabels.push(this.props.label)
-    } else {
-      this.props.issueLabels.pop(this.props.label)
-    }
-
     this.props.onUserInput(
+      this.props.label,
+      this.refs.issueLabelState.checked,
       this.props.issueLabels
     );
   },
