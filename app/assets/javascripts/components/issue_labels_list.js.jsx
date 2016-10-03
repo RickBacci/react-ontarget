@@ -4,8 +4,12 @@ var IssueLabelsList = React.createClass({
   },
   render: function() {
     var issueLabelListItems = this.props.labels.map(function(label, index){
+      if (label.display) {
+        var style = {backgroundColor: '#' + label.color};
+      } else {
+        var style = {display: 'none'};
+      }
 
-      var style = {backgroundColor: '#' + label.color};
       return (
         <li className='btn btn-xs' key={index} style={style}>
           {label.name}

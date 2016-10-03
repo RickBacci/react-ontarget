@@ -22,7 +22,12 @@ var RepoLabel = React.createClass({
       return _.includes(issueLabelNames, labelname)
     };
 
-    var divStyle = {backgroundColor: '#' + label.color}
+
+    if (label.display) {
+      var divStyle = {backgroundColor: '#' + label.color}
+    } else {
+      var divStyle = {display: 'none'};
+    }
     return (
       <div className={divClassNames} style={divStyle}>
         <input
