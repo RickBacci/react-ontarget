@@ -1,30 +1,30 @@
 var IssueCardContainer = React.createClass({
   propTypes: {
-    filteredRepoLabels:  React.PropTypes.array,
-    filteredIssueLabels: React.PropTypes.array,
+    repoLabels:  React.PropTypes.array,
+    issueLabels: React.PropTypes.array,
     issue:               React.PropTypes.object
   },
   getInitialState: function() {
     return {
-      filteredIssueLabels: this.props.filteredIssueLabels
+      issueLabels: this.props.issueLabels
     };
   },
-  handleUserInput: function(label, checked, filteredIssueLabels) {
+  handleUserInput: function(label, checked, issueLabels) {
 
     if (checked) {
-      filteredIssueLabels.push(label)
+      issueLabels.push(label)
     } else {
-      _.pullAllBy(filteredIssueLabels, [{ 'name': label.name }], 'name');
+      _.pullAllBy(issueLabels, [{ 'name': label.name }], 'name');
     }
-    filteredIssueLabels.push({name: this.props.issue.status, color: 'ededed'})
-    filteredIssueLabels.push({name: this.props.issue.time, color: 'ededed'})
+    issueLabels.push({name: this.props.issue.status, color: 'ededed'})
+    issueLabels.push({name: this.props.issue.time, color: 'ededed'})
 
     var url       = '/update_issues/' + this.props.issue.number.toString()
     var issueData = {
       number: this.props.issue.number,
       title:  this.props.issue.title,
       body:   this.props.issue.body,
-      labels: filteredIssueLabels
+      labels: issueLabels
     };
 
 
@@ -41,10 +41,10 @@ var IssueCardContainer = React.createClass({
       cache: false,
       success: function() {
 
-        filteredIssueLabels = _.sortBy(filteredIssueLabels, ['label', 'name']);
+        issueLabels = _.sortBy(issueLabels, ['label', 'name']);
 
         this.setState({
-          filteredIssueLabels: filterLabels(filteredIssueLabels)
+          issueLabels: filterLabels(issueLabels)
         });
 
         $.notify({
@@ -63,7 +63,7 @@ var IssueCardContainer = React.createClass({
   },
   render: function() {
     var issue = this.props.issue;
-    var filteredRepoLabels  = this.props.filteredRepoLabels;
+    var repoLabels  = this.props.repoLabels;
 
     var liClassNames = 'draggable panel panel-default card-panel cards';
 
@@ -74,8 +74,8 @@ var IssueCardContainer = React.createClass({
           issueMilestone = {issue.milestone}
         />
         <IssueCardDropdowns
-          repoLabels  = {filteredRepoLabels}
-          issueLabels = {this.state.filteredIssueLabels}
+          repoLabels  = {repoLabels}
+          issueLabels = {this.state.issueLabels}
           issueTime   = {issue.time}
           onUserInput = {this.handleUserInput}
         />
@@ -86,7 +86,7 @@ var IssueCardContainer = React.createClass({
           labels = {issue.labels}
         />
         <IssueLabelsList
-          labels      = {this.state.filteredIssueLabels}
+          labels      = {this.state.issueLabels}
         />
       </li>
     );
