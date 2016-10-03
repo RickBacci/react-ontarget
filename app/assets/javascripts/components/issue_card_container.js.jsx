@@ -2,7 +2,7 @@ var IssueCardContainer = React.createClass({
   propTypes: {
     repoLabels:  React.PropTypes.array,
     issueLabels: React.PropTypes.array,
-    issue:               React.PropTypes.object
+    issue:       React.PropTypes.object
   },
   getInitialState: function() {
     return {
@@ -74,7 +74,7 @@ var IssueCardContainer = React.createClass({
         <IssueCardDropdowns
           repoLabels  = {repoLabels}
           issueLabels = {this.state.issueLabels}
-          issueTime   = {issue.time}
+          issue       = {issue}
           onUserInput = {this.handleUserInput}
         />
         <IssueCardBody
@@ -84,7 +84,7 @@ var IssueCardContainer = React.createClass({
           labels = {issue.labels}
         />
         <IssueLabelsList
-          labels      = {this.state.issueLabels}
+          labels = {this.state.issueLabels}
         />
       </li>
     );

@@ -2,7 +2,7 @@ var IssueCardDropdowns = React.createClass({
   propTypes: {
     repoLabels:  React.PropTypes.array,
     issueLabels: React.PropTypes.array,
-    issueTime:   React.PropTypes.string
+    issue:       React.PropTypes.object
   },
   render: function() {
     return (
@@ -13,7 +13,9 @@ var IssueCardDropdowns = React.createClass({
             issueLabels = {this.props.issueLabels}
             onUserInput = {this.props.onUserInput}
           />
-          <UpdateTimeDropdown issueTime={ this.props.issueTime } />
+          <UpdateTimeDropdown
+            issue = {this.props.issue}
+          />
         </form>
       </div>
     );
