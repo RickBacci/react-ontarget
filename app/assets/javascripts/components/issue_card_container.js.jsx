@@ -16,8 +16,6 @@ var IssueCardContainer = React.createClass({
     } else {
       _.pullAllBy(issueLabels, [{ 'name': label.name }], 'name');
     }
-    issueLabels.push({name: this.props.issue.status, color: 'ededed'})
-    issueLabels.push({name: this.props.issue.time, color: 'ededed'})
 
     var url       = '/update_issues/' + this.props.issue.number.toString()
     var issueData = {
@@ -44,7 +42,7 @@ var IssueCardContainer = React.createClass({
         issueLabels = _.sortBy(issueLabels, ['label', 'name']);
 
         this.setState({
-          issueLabels: filterLabels(issueLabels)
+          issueLabels: issueLabels
         });
 
         $.notify({
