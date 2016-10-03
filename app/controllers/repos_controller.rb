@@ -25,18 +25,12 @@ class ReposController < ApplicationController
     set_client_and_current_repo_names(repo_name)
 
     issues = client.issues.list user: client.user, repo: client.repo
-
     labels = client.issues.labels.list.body
 
-    repo_labels =
-      labels.map { |label|
-        Hashie::Mash.new({ name: label.name, color: label.color })}
+    repo_labels = labels.map { |label| create_hashie(label) }
 
     issues = issues.body.map do |issue|
-      issue_labels =
-        issue.labels.map { |label|
-          Hashie::Mash.new({ name: label.name, color: label.color })}
-
+      issue_labels = issue.labels.map { |label| create_hashie(label) }
 
       Hashie::Mash.new(
         { number:    issue.number,
@@ -96,6 +90,19 @@ class ReposController < ApplicationController
 
 
   private
+
+  def create_hashie(label)
+    if hide_label?(label.name)
+      Hashie::Mash.new({ name: label.name, color: label.color, display: false })
+    else
+      Hashie::Mash.new({ name: label.name, color: label.color, display: true })
+    end
+  end
+
+
+  def hide_label?(label_name)
+    statuses.include?(label_name) || times.include?(label_name)
+  end
 
   def get_time(issue_labels)
     issue_time = ''
