@@ -1,20 +1,20 @@
 var IssueCardContainer = React.createClass({
   propTypes: {
-    repoLabels:  React.PropTypes.array,
-    issueLabels: React.PropTypes.array,
-    issue:       React.PropTypes.object
+    repo:  React.PropTypes.object,
+    issue: React.PropTypes.object
   },
   getInitialState: function() {
     return {
-      issueLabels: this.props.issueLabels
+      issueLabels: this.props.issue.labels
     };
   },
   handleUserInput: function(label, checked, issueLabels) {
+    var issue = this.props.issue;
 
     if (checked) {
-      issueLabels.push(label)
+      issue.labels.push(label)
     } else {
-      _.pullAllBy(issueLabels, [{ 'name': label.name }], 'name');
+      _.pullAllBy(issue.labels, [{ 'name': label.name }], 'name');
     }
 
     var url       = '/update_issues/' + this.props.issue.number.toString()
@@ -60,33 +60,36 @@ var IssueCardContainer = React.createClass({
 
   },
   render: function() {
-    var issue = this.props.issue;
-    var repoLabels  = this.props.repoLabels;
+    var issue        = this.props.issue;
+    var repoLabels   = this.props.repo.labels;
 
+    var ulClassNames = 'status-list sortable list-unstyled';
     var liClassNames = 'draggable panel panel-default card-panel cards';
 
     return (
-      <li className={liClassNames}>
-        <IssueCardHeader
-          issueNumber    = {issue.number}
-          issueMilestone = {issue.milestone}
-        />
-        <IssueCardDropdowns
-          repoLabels  = {repoLabels}
-          issueLabels = {this.state.issueLabels}
-          issue       = {issue}
-          onUserInput = {this.handleUserInput}
-        />
-        <IssueCardBody
-          title  = {issue.title}
-          body   = {issue.body}
-          number = {issue.number}
-          labels = {issue.labels}
-        />
-        <IssueLabelsList
-          labels = {this.state.issueLabels}
-        />
-      </li>
+      <ul className={ulClassNames} data-columnstatus={issue.status}>
+        <li className={liClassNames}>
+          <IssueCardHeader
+            issueNumber    = {issue.number}
+            issueMilestone = {issue.milestone}
+          />
+          <IssueCardDropdowns
+            repoLabels  = {repoLabels}
+            issueLabels = {this.state.issueLabels}
+            issue       = {issue}
+            onUserInput = {this.handleUserInput}
+          />
+          <IssueCardBody
+            title  = {issue.title}
+            body   = {issue.body}
+            number = {issue.number}
+            labels = {issue.labels}
+          />
+          <IssueLabelsList
+            labels = {this.state.issueLabels}
+          />
+        </li>
+      </ul>
     );
   }
 });
