@@ -17,47 +17,11 @@ var IssueCardContainer = React.createClass({
       _.pullAllBy(issue.labels, [{ 'name': label.name }], 'name');
     }
 
-    var url       = '/update_issues/' + this.props.issue.number.toString()
-    var issueData = {
-      number: this.props.issue.number,
-      title:  this.props.issue.title,
-      body:   this.props.issue.body,
-      labels: issueLabels
-    };
+    updateIssue(issue, 'Label')
 
+    issueLabels = _.sortBy(issue.labels, ['label', 'name']);
 
-    $.ajax({
-      url: url,
-      method: 'patch',
-      data: {
-        number: issueData.number,
-        title:  issueData.title,
-        body:   issueData.body,
-        labels: issueData.labels
-      },
-      dataType: 'json',
-      cache: false,
-      success: function() {
-
-        issueLabels = _.sortBy(issueLabels, ['label', 'name']);
-
-        this.setState({
-          issueLabels: issueLabels
-        });
-
-        $.notify({
-          message: 'Issue Label Update Successful!'
-        });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        $.notify({
-          message: 'Issue Label Update Failed!'
-        });
-        console.error(url, status, err.toString());
-      }.bind(this)
-
-    });
-
+    this.setState({ issueLabels: issueLabels });
   },
   render: function() {
     var issue        = this.props.issue;

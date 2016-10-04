@@ -7,7 +7,6 @@ var RepoLabel = React.createClass({
     this.props.onUserInput(
       this.props.label,
       this.refs.issueLabelState.checked,
-      this.props.issueLabels
     );
   },
   render: function() {

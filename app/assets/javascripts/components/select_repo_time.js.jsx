@@ -15,46 +15,9 @@ var SelectRepoTime = React.createClass({
     issue.labels.push(label)
     _.pullAllBy(issue.labels, [{ 'name': issue.time }], 'name');
 
-    var url       = '/update_issues/' + this.props.issue.number.toString()
-    var issueData = {
-      number: this.props.issue.number,
-      title:  this.props.issue.title,
-      body:   this.props.issue.body,
-      labels: issue.labels
-    };
+    updateIssue(issue, 'Time');
 
-
-    $.ajax({
-      url: url,
-      method: 'patch',
-      data: {
-        number: issueData.number,
-        title:  issueData.title,
-        body:   issueData.body,
-        labels: issueData.labels
-      },
-      dataType: 'json',
-      cache: false,
-      success: function() {
-
-        issue.labels = _.sortBy(issue.labels, ['label', 'name']);
-
-        this.setState({
-          issueTime: newTime
-        });
-
-        $.notify({
-          message: 'Issue Time Update Successful!'
-        });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        $.notify({
-          message: 'Issue Time Update Failed!'
-        });
-        console.error(url, status, err.toString());
-      }.bind(this)
-
-    });
+    this.setState({ issueTime: newTime });
   },
   render: function() {
     var timerValues = {
@@ -79,7 +42,7 @@ var SelectRepoTime = React.createClass({
         className = 'form-control margin-right'
         value     = {this.state.issueTime}
         name      = 'timer-time'>
-          {dropDownTimes}
+        {dropDownTimes}
       </select>
     );
   }
