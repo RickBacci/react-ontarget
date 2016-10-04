@@ -12,4 +12,4 @@
               = status
             - @repo.issues.each do |issue|
               - next unless issue.status == status
-              = react_component('IssueCards', repo: @repo)
+              = react_component('IssueCardContainer', repo: @repo, issue: issue)
