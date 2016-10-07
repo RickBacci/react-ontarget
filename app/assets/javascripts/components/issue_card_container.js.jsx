@@ -17,11 +17,12 @@ var IssueCardContainer = React.createClass({
       _.pullAllBy(issue.labels, [{ 'name': label.name }], 'name');
     }
 
-    updateIssue(issue, 'Label')
+    updateIssue(issue, 'Label', function() {
+      this.setState({ issueLabels: issueLabels });
+    }.bind(this));
 
     issueLabels = _.sortBy(issue.labels, ['label', 'name']);
 
-    this.setState({ issueLabels: issueLabels });
   },
   render: function() {
     var issue        = this.props.issue;

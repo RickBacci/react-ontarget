@@ -1,6 +1,4 @@
-
-
-function updateIssue(issue, updated) {
+function updateIssue(issue, updated, success) {
   $.ajax({
     url: '/update_issues/' + issue.number.toString()
 ,
@@ -19,13 +17,15 @@ function updateIssue(issue, updated) {
         message: 'Issue ' + updated + ' Update Successful!'
       });
 
-    }.bind(this),
+      (success || Function())()
+
+    },
     error: function(xhr, status, err) {
       $.notify({
         message: 'Issue Label Update Failed!'
       });
       console.error(url, status, err.toString());
-    }.bind(this)
+    }
 
   });
 

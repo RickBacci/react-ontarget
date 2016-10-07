@@ -15,9 +15,10 @@ var SelectRepoTime = React.createClass({
     issue.labels.push(label)
     _.pullAllBy(issue.labels, [{ 'name': issue.time }], 'name');
 
-    updateIssue(issue, 'Time');
+    updateIssue(issue, 'Time', function() {
+      this.setState({issueTime: newTime});
+    }.bind(this));
 
-    this.setState({ issueTime: newTime });
   },
   render: function() {
     var timerValues = {
